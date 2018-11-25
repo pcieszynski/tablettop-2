@@ -1,0 +1,42 @@
+{
+    "name": "Item",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "effect",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "shop",
+            "otherEntityName": "shop",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "item"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "character",
+            "otherEntityName": "character",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "item"
+        }
+    ],
+    "changelogDate": "20181125195753",
+    "entityTableName": "item",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
