@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing Character.
@@ -62,6 +64,20 @@ public class CharacterServiceImpl implements CharacterService {
         return characterRepository.findAllWithEagerRelationships(pageable);
     }
     
+
+
+    /**
+     *  get all the characters where Backpack is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<Character> findAllWhereBackpackIsNull() {
+        log.debug("Request to get all characters where Backpack is null");
+        return StreamSupport
+            .stream(characterRepository.findAll().spliterator(), false)
+            .filter(character -> character.getBackpack() == null)
+            .collect(Collectors.toList());
+    }
 
     /**
      * Get one character by id.

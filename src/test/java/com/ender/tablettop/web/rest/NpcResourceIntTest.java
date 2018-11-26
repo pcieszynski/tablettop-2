@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -42,6 +43,9 @@ public class NpcResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MESSAGE = "AAAAAAAAAA";
+    private static final String UPDATED_MESSAGE = "BBBBBBBBBB";
 
     @Autowired
     private NpcRepository npcRepository;
@@ -84,7 +88,8 @@ public class NpcResourceIntTest {
      */
     public static Npc createEntity(EntityManager em) {
         Npc npc = new Npc()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .message(DEFAULT_MESSAGE);
         return npc;
     }
 
@@ -109,6 +114,7 @@ public class NpcResourceIntTest {
         assertThat(npcList).hasSize(databaseSizeBeforeCreate + 1);
         Npc testNpc = npcList.get(npcList.size() - 1);
         assertThat(testNpc.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testNpc.getMessage()).isEqualTo(DEFAULT_MESSAGE);
     }
 
     @Test
@@ -141,7 +147,8 @@ public class NpcResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(npc.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())));
     }
     
     @Test
@@ -155,7 +162,8 @@ public class NpcResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(npc.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.message").value(DEFAULT_MESSAGE.toString()));
     }
 
     @Test
@@ -179,7 +187,8 @@ public class NpcResourceIntTest {
         // Disconnect from session so that the updates on updatedNpc are not directly saved in db
         em.detach(updatedNpc);
         updatedNpc
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .message(UPDATED_MESSAGE);
 
         restNpcMockMvc.perform(put("/api/npcs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -191,6 +200,7 @@ public class NpcResourceIntTest {
         assertThat(npcList).hasSize(databaseSizeBeforeUpdate);
         Npc testNpc = npcList.get(npcList.size() - 1);
         assertThat(testNpc.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testNpc.getMessage()).isEqualTo(UPDATED_MESSAGE);
     }
 
     @Test

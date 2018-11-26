@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Backpack.
+    -->
+    <changeSet id="20181126135534-1" author="jhipster">
+        <createTable tableName="backpack">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>            <column name="character_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_backpack_character_id" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+        <createTable tableName="backpack_legs">
+            <column name="legs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, legs_id" tableName="backpack_legs"/>
+        
+        <createTable tableName="backpack_boots">
+            <column name="boots_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, boots_id" tableName="backpack_boots"/>
+        
+        <createTable tableName="backpack_gloves">
+            <column name="gloves_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, gloves_id" tableName="backpack_gloves"/>
+        
+        <createTable tableName="backpack_righthand">
+            <column name="righthands_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, righthands_id" tableName="backpack_righthand"/>
+        
+        <createTable tableName="backpack_lefthand">
+            <column name="lefthands_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, lefthands_id" tableName="backpack_lefthand"/>
+        
+        <createTable tableName="backpack_armour">
+            <column name="armours_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, armours_id" tableName="backpack_armour"/>
+        
+        <createTable tableName="backpack_helmet">
+            <column name="helmets_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, helmets_id" tableName="backpack_helmet"/>
+        
+        <createTable tableName="backpack_item">
+            <column name="items_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="backpacks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="backpacks_id, items_id" tableName="backpack_item"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

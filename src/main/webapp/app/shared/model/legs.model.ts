@@ -1,5 +1,6 @@
 import { ICharacter } from 'app/shared/model//character.model';
 import { IShop } from 'app/shared/model//shop.model';
+import { IBackpack } from 'app/shared/model//backpack.model';
 
 export interface ILegs {
   id?: number;
@@ -10,6 +11,7 @@ export interface ILegs {
   part?: string;
   characters?: ICharacter[];
   shops?: IShop[];
+  backpacks?: IBackpack[];
 }
 
 export const defaultValue: Readonly<ILegs> = {};

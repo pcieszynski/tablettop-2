@@ -12,6 +12,8 @@ import { IShop } from 'app/shared/model/shop.model';
 import { getEntities as getShops } from 'app/entities/shop/shop.reducer';
 import { ICharacter } from 'app/shared/model/character.model';
 import { getEntities as getCharacters } from 'app/entities/character/character.reducer';
+import { IBackpack } from 'app/shared/model/backpack.model';
+import { getEntities as getBackpacks } from 'app/entities/backpack/backpack.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './item.reducer';
 import { IItem } from 'app/shared/model/item.model';
 // tslint:disable-next-line:no-unused-variable
@@ -24,6 +26,7 @@ export interface IItemUpdateState {
   isNew: boolean;
   shopId: string;
   characterId: string;
+  backpackId: string;
 }
 
 export class ItemUpdate extends React.Component<IItemUpdateProps, IItemUpdateState> {
@@ -32,6 +35,7 @@ export class ItemUpdate extends React.Component<IItemUpdateProps, IItemUpdateSta
     this.state = {
       shopId: '0',
       characterId: '0',
+      backpackId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -51,6 +55,7 @@ export class ItemUpdate extends React.Component<IItemUpdateProps, IItemUpdateSta
 
     this.props.getShops();
     this.props.getCharacters();
+    this.props.getBackpacks();
   }
 
   saveEntity = (event, errors, values) => {
@@ -74,7 +79,7 @@ export class ItemUpdate extends React.Component<IItemUpdateProps, IItemUpdateSta
   };
 
   render() {
-    const { itemEntity, shops, characters, loading, updating } = this.props;
+    const { itemEntity, shops, characters, backpacks, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -134,6 +139,7 @@ export class ItemUpdate extends React.Component<IItemUpdateProps, IItemUpdateSta
 const mapStateToProps = (storeState: IRootState) => ({
   shops: storeState.shop.entities,
   characters: storeState.character.entities,
+  backpacks: storeState.backpack.entities,
   itemEntity: storeState.item.entity,
   loading: storeState.item.loading,
   updating: storeState.item.updating,
@@ -143,6 +149,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getShops,
   getCharacters,
+  getBackpacks,
   getEntity,
   updateEntity,
   createEntity,

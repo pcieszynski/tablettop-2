@@ -14,6 +14,8 @@ import { IStatus } from 'app/shared/model/status.model';
 import { getEntities as getStatuses } from 'app/entities/status/status.reducer';
 import { IItem } from 'app/shared/model/item.model';
 import { getEntities as getItems } from 'app/entities/item/item.reducer';
+import { IBackpack } from 'app/shared/model/backpack.model';
+import { getEntities as getBackpacks } from 'app/entities/backpack/backpack.reducer';
 import { IGame } from 'app/shared/model/game.model';
 import { getEntities as getGames } from 'app/entities/game/game.reducer';
 import { IProfession } from 'app/shared/model/profession.model';
@@ -47,6 +49,7 @@ export interface ICharacterUpdateState {
   idsskill: any[];
   idsstatus: any[];
   idsitem: any[];
+  backpackId: string;
   gameId: string;
   professionId: string;
   playerId: string;
@@ -66,6 +69,7 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
       idsskill: [],
       idsstatus: [],
       idsitem: [],
+      backpackId: '0',
       gameId: '0',
       professionId: '0',
       playerId: '0',
@@ -96,6 +100,7 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
     this.props.getSkills();
     this.props.getStatuses();
     this.props.getItems();
+    this.props.getBackpacks();
     this.props.getGames();
     this.props.getProfessions();
     this.props.getPlayers();
@@ -137,6 +142,7 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
       skills,
       statuses,
       items,
+      backpacks,
       games,
       professions,
       players,
@@ -242,6 +248,18 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
                     Charisma
                   </Label>
                   <AvField id="character-charisma" type="string" className="form-control" name="charisma" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="attributePointsLabel" for="attributePoints">
+                    Attribute Points
+                  </Label>
+                  <AvField id="character-attributePoints" type="string" className="form-control" name="attributePoints" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="skillPointsLabel" for="skillPoints">
+                    Skill Points
+                  </Label>
+                  <AvField id="character-skillPoints" type="string" className="form-control" name="skillPoints" />
                 </AvGroup>
                 <AvGroup>
                   <Label for="skills">Skill</Label>
@@ -454,6 +472,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   skills: storeState.skill.entities,
   statuses: storeState.status.entities,
   items: storeState.item.entities,
+  backpacks: storeState.backpack.entities,
   games: storeState.game.entities,
   professions: storeState.profession.entities,
   players: storeState.player.entities,
@@ -474,6 +493,7 @@ const mapDispatchToProps = {
   getSkills,
   getStatuses,
   getItems,
+  getBackpacks,
   getGames,
   getProfessions,
   getPlayers,

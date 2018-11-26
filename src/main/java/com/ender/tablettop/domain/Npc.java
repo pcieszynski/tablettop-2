@@ -24,6 +24,10 @@ public class Npc implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Lob
+    @Column(name = "message")
+    private String message;
+
     @ManyToOne
     @JsonIgnoreProperties("npcs")
     private Event event;
@@ -48,6 +52,19 @@ public class Npc implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Npc message(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Event getEvent() {
@@ -89,6 +106,7 @@ public class Npc implements Serializable {
         return "Npc{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", message='" + getMessage() + "'" +
             "}";
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { ICrudGetAction } from 'react-jhipster';
+import { ICrudGetAction, byteSize } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -32,6 +32,10 @@ export class NpcDetail extends React.Component<INpcDetailProps> {
               <span id="name">Name</span>
             </dt>
             <dd>{npcEntity.name}</dd>
+            <dt>
+              <span id="message">Message</span>
+            </dt>
+            <dd>{npcEntity.message}</dd>
             <dt>Event</dt>
             <dd>{npcEntity.event ? npcEntity.event.id : ''}</dd>
           </dl>

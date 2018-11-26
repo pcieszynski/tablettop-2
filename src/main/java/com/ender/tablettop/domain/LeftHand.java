@@ -49,6 +49,10 @@ public class LeftHand implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "shops_id", referencedColumnName = "id"))
     private Set<Shop> shops = new HashSet<>();
 
+    @ManyToMany(mappedBy = "lefthands")
+    @JsonIgnore
+    private Set<Backpack> backpacks = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -184,6 +188,31 @@ public class LeftHand implements Serializable {
 
     public void setShops(Set<Shop> shops) {
         this.shops = shops;
+    }
+
+    public Set<Backpack> getBackpacks() {
+        return backpacks;
+    }
+
+    public LeftHand backpacks(Set<Backpack> backpacks) {
+        this.backpacks = backpacks;
+        return this;
+    }
+
+    public LeftHand addBackpack(Backpack backpack) {
+        this.backpacks.add(backpack);
+        backpack.getLefthands().add(this);
+        return this;
+    }
+
+    public LeftHand removeBackpack(Backpack backpack) {
+        this.backpacks.remove(backpack);
+        backpack.getLefthands().remove(this);
+        return this;
+    }
+
+    public void setBackpacks(Set<Backpack> backpacks) {
+        this.backpacks = backpacks;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

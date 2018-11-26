@@ -27,6 +27,12 @@ public interface CharacterService {
      * @return the list of entities
      */
     List<Character> findAll();
+    /**
+     * Get all the CharacterDTO where Backpack is null.
+     *
+     * @return the list of entities
+     */
+    List<Character> findAllWhereBackpackIsNull();
 
     /**
      * Get all the Character with eager load of many-to-many relationships.

@@ -1,0 +1,87 @@
+{
+    "name": "Backpack",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "character",
+            "otherEntityName": "character",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "backpack"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "legs",
+            "otherEntityName": "legs",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "boots",
+            "otherEntityName": "boots",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "gloves",
+            "otherEntityName": "gloves",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "righthand",
+            "otherEntityName": "rightHand",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "lefthand",
+            "otherEntityName": "leftHand",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "armour",
+            "otherEntityName": "armour",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "helmet",
+            "otherEntityName": "helmet",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "backpack",
+            "relationshipName": "item",
+            "otherEntityName": "item",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181126135534",
+    "entityTableName": "backpack",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,5 +1,6 @@
 import { ICharacter } from 'app/shared/model//character.model';
 import { IShop } from 'app/shared/model//shop.model';
+import { IBackpack } from 'app/shared/model//backpack.model';
 
 export interface ILeftHand {
   id?: number;
@@ -11,6 +12,7 @@ export interface ILeftHand {
   type?: string;
   characters?: ICharacter[];
   shops?: IShop[];
+  backpacks?: IBackpack[];
 }
 
 export const defaultValue: Readonly<ILeftHand> = {};

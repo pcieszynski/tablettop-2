@@ -4,13 +4,13 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
-import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
+import { ICrudGetAction, ICrudGetAllAction, setFileData, byteSize, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
 import { IEvent } from 'app/shared/model/event.model';
 import { getEntities as getEvents } from 'app/entities/event/event.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './npc.reducer';
+import { getEntity, updateEntity, createEntity, setBlob, reset } from './npc.reducer';
 import { INpc } from 'app/shared/model/npc.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
@@ -48,6 +48,14 @@ export class NpcUpdate extends React.Component<INpcUpdateProps, INpcUpdateState>
     this.props.getEvents();
   }
 
+  onBlobChange = (isAnImage, name) => event => {
+    setFileData(event, (contentType, data) => this.props.setBlob(name, data, contentType), isAnImage);
+  };
+
+  clearBlob = name => () => {
+    this.props.setBlob(name, undefined, undefined);
+  };
+
   saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const { npcEntity } = this.props;
@@ -71,6 +79,8 @@ export class NpcUpdate extends React.Component<INpcUpdateProps, INpcUpdateState>
   render() {
     const { npcEntity, events, loading, updating } = this.props;
     const { isNew } = this.state;
+
+    const { message } = npcEntity;
 
     return (
       <div>
@@ -96,6 +106,12 @@ export class NpcUpdate extends React.Component<INpcUpdateProps, INpcUpdateState>
                     Name
                   </Label>
                   <AvField id="npc-name" type="text" name="name" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="messageLabel" for="message">
+                    Message
+                  </Label>
+                  <AvInput id="npc-message" type="textarea" name="message" />
                 </AvGroup>
                 <AvGroup>
                   <Label for="event.id">Event</Label>
@@ -139,6 +155,7 @@ const mapDispatchToProps = {
   getEvents,
   getEntity,
   updateEntity,
+  setBlob,
   createEntity,
   reset
 };

@@ -76,6 +76,14 @@ export class CharacterDetail extends React.Component<ICharacterDetailProps> {
               <span id="charisma">Charisma</span>
             </dt>
             <dd>{characterEntity.charisma}</dd>
+            <dt>
+              <span id="attributePoints">Attribute Points</span>
+            </dt>
+            <dd>{characterEntity.attributePoints}</dd>
+            <dt>
+              <span id="skillPoints">Skill Points</span>
+            </dt>
+            <dd>{characterEntity.skillPoints}</dd>
             <dt>Skill</dt>
             <dd>
               {characterEntity.skills

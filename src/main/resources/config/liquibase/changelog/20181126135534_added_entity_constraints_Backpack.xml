@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Backpack.
+    -->
+    <changeSet id="20181126135534-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="character_id"
+                                 baseTableName="backpack"
+                                 constraintName="fk_backpack_character_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="character"/>
+
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_legs"
+                                 constraintName="fk_backpack_legs_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="legs_id"
+                                 baseTableName="backpack_legs"
+                                 constraintName="fk_backpack_legs_legs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="legs"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_boots"
+                                 constraintName="fk_backpack_boots_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="boots_id"
+                                 baseTableName="backpack_boots"
+                                 constraintName="fk_backpack_boots_boots_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="boots"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_gloves"
+                                 constraintName="fk_backpack_gloves_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="gloves_id"
+                                 baseTableName="backpack_gloves"
+                                 constraintName="fk_backpack_gloves_gloves_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="gloves"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_righthand"
+                                 constraintName="fk_backpack_righthand_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="righthands_id"
+                                 baseTableName="backpack_righthand"
+                                 constraintName="fk_backpack_righthand_righthands_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="right_hand"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_lefthand"
+                                 constraintName="fk_backpack_lefthand_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="lefthands_id"
+                                 baseTableName="backpack_lefthand"
+                                 constraintName="fk_backpack_lefthand_lefthands_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_hand"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_armour"
+                                 constraintName="fk_backpack_armour_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="armours_id"
+                                 baseTableName="backpack_armour"
+                                 constraintName="fk_backpack_armour_armours_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="armour"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_helmet"
+                                 constraintName="fk_backpack_helmet_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="helmets_id"
+                                 baseTableName="backpack_helmet"
+                                 constraintName="fk_backpack_helmet_helmets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="helmet"/>
+        
+        <addForeignKeyConstraint baseColumnNames="backpacks_id"
+                                 baseTableName="backpack_item"
+                                 constraintName="fk_backpack_item_backpacks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="backpack"/>
+        <addForeignKeyConstraint baseColumnNames="items_id"
+                                 baseTableName="backpack_item"
+                                 constraintName="fk_backpack_item_items_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+        
+    </changeSet>
+</databaseChangeLog>

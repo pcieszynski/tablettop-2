@@ -10,6 +10,8 @@ import { IRootState } from 'app/shared/reducers';
 
 import { IShop } from 'app/shared/model/shop.model';
 import { getEntities as getShops } from 'app/entities/shop/shop.reducer';
+import { IBackpack } from 'app/shared/model/backpack.model';
+import { getEntities as getBackpacks } from 'app/entities/backpack/backpack.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './right-hand.reducer';
 import { IRightHand } from 'app/shared/model/right-hand.model';
 // tslint:disable-next-line:no-unused-variable
@@ -21,6 +23,7 @@ export interface IRightHandUpdateProps extends StateProps, DispatchProps, RouteC
 export interface IRightHandUpdateState {
   isNew: boolean;
   idsshop: any[];
+  backpackId: string;
 }
 
 export class RightHandUpdate extends React.Component<IRightHandUpdateProps, IRightHandUpdateState> {
@@ -28,6 +31,7 @@ export class RightHandUpdate extends React.Component<IRightHandUpdateProps, IRig
     super(props);
     this.state = {
       idsshop: [],
+      backpackId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -46,6 +50,7 @@ export class RightHandUpdate extends React.Component<IRightHandUpdateProps, IRig
     }
 
     this.props.getShops();
+    this.props.getBackpacks();
   }
 
   saveEntity = (event, errors, values) => {
@@ -70,7 +75,7 @@ export class RightHandUpdate extends React.Component<IRightHandUpdateProps, IRig
   };
 
   render() {
-    const { rightHandEntity, shops, loading, updating } = this.props;
+    const { rightHandEntity, shops, backpacks, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -167,6 +172,7 @@ export class RightHandUpdate extends React.Component<IRightHandUpdateProps, IRig
 
 const mapStateToProps = (storeState: IRootState) => ({
   shops: storeState.shop.entities,
+  backpacks: storeState.backpack.entities,
   rightHandEntity: storeState.rightHand.entity,
   loading: storeState.rightHand.loading,
   updating: storeState.rightHand.updating,
@@ -175,6 +181,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getShops,
+  getBackpacks,
   getEntity,
   updateEntity,
   createEntity,

@@ -40,6 +40,10 @@ public class Item implements Serializable {
     @JsonIgnore
     private Set<Character> characters = new HashSet<>();
 
+    @ManyToMany(mappedBy = "items")
+    @JsonIgnore
+    private Set<Backpack> backpacks = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -136,6 +140,31 @@ public class Item implements Serializable {
 
     public void setCharacters(Set<Character> characters) {
         this.characters = characters;
+    }
+
+    public Set<Backpack> getBackpacks() {
+        return backpacks;
+    }
+
+    public Item backpacks(Set<Backpack> backpacks) {
+        this.backpacks = backpacks;
+        return this;
+    }
+
+    public Item addBackpack(Backpack backpack) {
+        this.backpacks.add(backpack);
+        backpack.getItems().add(this);
+        return this;
+    }
+
+    public Item removeBackpack(Backpack backpack) {
+        this.backpacks.remove(backpack);
+        backpack.getItems().remove(this);
+        return this;
+    }
+
+    public void setBackpacks(Set<Backpack> backpacks) {
+        this.backpacks = backpacks;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

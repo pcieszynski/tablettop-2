@@ -26,6 +26,7 @@ import Helmet from './helmet';
 import Gloves from './gloves';
 import RightHand from './right-hand';
 import LeftHand from './left-hand';
+import Backpack from './backpack';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -54,6 +55,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}/gloves`} component={Gloves} />
       <ErrorBoundaryRoute path={`${match.url}/right-hand`} component={RightHand} />
       <ErrorBoundaryRoute path={`${match.url}/left-hand`} component={LeftHand} />
+      <ErrorBoundaryRoute path={`${match.url}/backpack`} component={Backpack} />
       {/* jhipster-needle-add-route-path - JHipster will routes here */}
     </Switch>
   </div>

@@ -10,6 +10,8 @@ import { IRootState } from 'app/shared/reducers';
 
 import { IShop } from 'app/shared/model/shop.model';
 import { getEntities as getShops } from 'app/entities/shop/shop.reducer';
+import { IBackpack } from 'app/shared/model/backpack.model';
+import { getEntities as getBackpacks } from 'app/entities/backpack/backpack.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './helmet.reducer';
 import { IHelmet } from 'app/shared/model/helmet.model';
 // tslint:disable-next-line:no-unused-variable
@@ -21,6 +23,7 @@ export interface IHelmetUpdateProps extends StateProps, DispatchProps, RouteComp
 export interface IHelmetUpdateState {
   isNew: boolean;
   idsshop: any[];
+  backpackId: string;
 }
 
 export class HelmetUpdate extends React.Component<IHelmetUpdateProps, IHelmetUpdateState> {
@@ -28,6 +31,7 @@ export class HelmetUpdate extends React.Component<IHelmetUpdateProps, IHelmetUpd
     super(props);
     this.state = {
       idsshop: [],
+      backpackId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -46,6 +50,7 @@ export class HelmetUpdate extends React.Component<IHelmetUpdateProps, IHelmetUpd
     }
 
     this.props.getShops();
+    this.props.getBackpacks();
   }
 
   saveEntity = (event, errors, values) => {
@@ -70,7 +75,7 @@ export class HelmetUpdate extends React.Component<IHelmetUpdateProps, IHelmetUpd
   };
 
   render() {
-    const { helmetEntity, shops, loading, updating } = this.props;
+    const { helmetEntity, shops, backpacks, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -161,6 +166,7 @@ export class HelmetUpdate extends React.Component<IHelmetUpdateProps, IHelmetUpd
 
 const mapStateToProps = (storeState: IRootState) => ({
   shops: storeState.shop.entities,
+  backpacks: storeState.backpack.entities,
   helmetEntity: storeState.helmet.entity,
   loading: storeState.helmet.loading,
   updating: storeState.helmet.updating,
@@ -169,6 +175,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getShops,
+  getBackpacks,
   getEntity,
   updateEntity,
   createEntity,
