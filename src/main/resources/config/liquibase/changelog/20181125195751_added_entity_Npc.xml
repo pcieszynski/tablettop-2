@@ -25,6 +25,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="message" type="clob">
+                <constraints nullable="true" />
+            </column>
+
             <column name="event_id" type="bigint">
                 <constraints nullable="true" />
             </column>

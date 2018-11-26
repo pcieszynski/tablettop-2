@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Character.
@@ -80,11 +81,16 @@ public class CharacterResource {
      * GET  /characters : get all the characters.
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of characters in body
      */
     @GetMapping("/characters")
     @Timed
-    public List<Character> getAllCharacters(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Character> getAllCharacters(@RequestParam(required = false) String filter,@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        if ("backpack-is-null".equals(filter)) {
+            log.debug("REST request to get all Characters where backpack is null");
+            return characterService.findAllWhereBackpackIsNull();
+        }
         log.debug("REST request to get all Characters");
         return characterService.findAll();
     }

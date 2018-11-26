@@ -48,6 +48,14 @@
         {
             "fieldName": "charisma",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "attributePoints",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "skillPoints",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [
@@ -74,6 +82,13 @@
             "otherEntityName": "item",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "backpack",
+            "otherEntityName": "backpack",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "character"
         },
         {
             "relationshipType": "many-to-one",

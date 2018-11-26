@@ -27,6 +27,7 @@
     <include file="config/liquibase/changelog/20181125195758_added_entity_Gloves.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181125195759_added_entity_RightHand.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181125195800_added_entity_LeftHand.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181126135534_added_entity_Backpack.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20181125195740_added_entity_constraints_Gamemaster.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181125195741_added_entity_constraints_Game.xml" relativeToChangelogFile="false"/>
@@ -45,5 +46,6 @@
     <include file="config/liquibase/changelog/20181125195758_added_entity_constraints_Gloves.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181125195759_added_entity_constraints_RightHand.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181125195800_added_entity_constraints_LeftHand.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181126135534_added_entity_constraints_Backpack.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

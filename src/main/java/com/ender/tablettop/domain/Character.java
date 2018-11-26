@@ -1,5 +1,6 @@
 package com.ender.tablettop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 
@@ -61,6 +62,12 @@ public class Character implements Serializable {
     @Column(name = "charisma")
     private Integer charisma;
 
+    @Column(name = "attribute_points")
+    private Integer attributePoints;
+
+    @Column(name = "skill_points")
+    private Integer skillPoints;
+
     @ManyToMany
     @JoinTable(name = "character_skill",
                joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
@@ -78,6 +85,10 @@ public class Character implements Serializable {
                joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
     private Set<Item> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "character")
+    @JsonIgnore
+    private Backpack backpack;
 
     @ManyToOne
     @JsonIgnoreProperties("characters")
@@ -284,6 +295,32 @@ public class Character implements Serializable {
         this.charisma = charisma;
     }
 
+    public Integer getAttributePoints() {
+        return attributePoints;
+    }
+
+    public Character attributePoints(Integer attributePoints) {
+        this.attributePoints = attributePoints;
+        return this;
+    }
+
+    public void setAttributePoints(Integer attributePoints) {
+        this.attributePoints = attributePoints;
+    }
+
+    public Integer getSkillPoints() {
+        return skillPoints;
+    }
+
+    public Character skillPoints(Integer skillPoints) {
+        this.skillPoints = skillPoints;
+        return this;
+    }
+
+    public void setSkillPoints(Integer skillPoints) {
+        this.skillPoints = skillPoints;
+    }
+
     public Set<Skill> getSkills() {
         return skills;
     }
@@ -357,6 +394,19 @@ public class Character implements Serializable {
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    public Backpack getBackpack() {
+        return backpack;
+    }
+
+    public Character backpack(Backpack backpack) {
+        this.backpack = backpack;
+        return this;
+    }
+
+    public void setBackpack(Backpack backpack) {
+        this.backpack = backpack;
     }
 
     public Game getGame() {
@@ -526,6 +576,8 @@ public class Character implements Serializable {
             ", intelligence=" + getIntelligence() +
             ", willpower=" + getWillpower() +
             ", charisma=" + getCharisma() +
+            ", attributePoints=" + getAttributePoints() +
+            ", skillPoints=" + getSkillPoints() +
             "}";
     }
 }

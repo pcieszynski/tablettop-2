@@ -1,6 +1,7 @@
 import { ISkill } from 'app/shared/model//skill.model';
 import { IStatus } from 'app/shared/model//status.model';
 import { IItem } from 'app/shared/model//item.model';
+import { IBackpack } from 'app/shared/model//backpack.model';
 import { IGame } from 'app/shared/model//game.model';
 import { IProfession } from 'app/shared/model//profession.model';
 import { IPlayer } from 'app/shared/model//player.model';
@@ -26,9 +27,12 @@ export interface ICharacter {
   intelligence?: number;
   willpower?: number;
   charisma?: number;
+  attributePoints?: number;
+  skillPoints?: number;
   skills?: ISkill[];
   statuses?: IStatus[];
   items?: IItem[];
+  backpack?: IBackpack;
   game?: IGame;
   profession?: IProfession;
   player?: IPlayer;

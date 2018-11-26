@@ -81,6 +81,12 @@ public class CharacterResourceIntTest {
     private static final Integer DEFAULT_CHARISMA = 1;
     private static final Integer UPDATED_CHARISMA = 2;
 
+    private static final Integer DEFAULT_ATTRIBUTE_POINTS = 1;
+    private static final Integer UPDATED_ATTRIBUTE_POINTS = 2;
+
+    private static final Integer DEFAULT_SKILL_POINTS = 1;
+    private static final Integer UPDATED_SKILL_POINTS = 2;
+
     @Autowired
     private CharacterRepository characterRepository;
 
@@ -139,7 +145,9 @@ public class CharacterResourceIntTest {
             .constituition(DEFAULT_CONSTITUITION)
             .intelligence(DEFAULT_INTELLIGENCE)
             .willpower(DEFAULT_WILLPOWER)
-            .charisma(DEFAULT_CHARISMA);
+            .charisma(DEFAULT_CHARISMA)
+            .attributePoints(DEFAULT_ATTRIBUTE_POINTS)
+            .skillPoints(DEFAULT_SKILL_POINTS);
         return character;
     }
 
@@ -175,6 +183,8 @@ public class CharacterResourceIntTest {
         assertThat(testCharacter.getIntelligence()).isEqualTo(DEFAULT_INTELLIGENCE);
         assertThat(testCharacter.getWillpower()).isEqualTo(DEFAULT_WILLPOWER);
         assertThat(testCharacter.getCharisma()).isEqualTo(DEFAULT_CHARISMA);
+        assertThat(testCharacter.getAttributePoints()).isEqualTo(DEFAULT_ATTRIBUTE_POINTS);
+        assertThat(testCharacter.getSkillPoints()).isEqualTo(DEFAULT_SKILL_POINTS);
     }
 
     @Test
@@ -218,7 +228,9 @@ public class CharacterResourceIntTest {
             .andExpect(jsonPath("$.[*].constituition").value(hasItem(DEFAULT_CONSTITUITION)))
             .andExpect(jsonPath("$.[*].intelligence").value(hasItem(DEFAULT_INTELLIGENCE)))
             .andExpect(jsonPath("$.[*].willpower").value(hasItem(DEFAULT_WILLPOWER)))
-            .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)));
+            .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)))
+            .andExpect(jsonPath("$.[*].attributePoints").value(hasItem(DEFAULT_ATTRIBUTE_POINTS)))
+            .andExpect(jsonPath("$.[*].skillPoints").value(hasItem(DEFAULT_SKILL_POINTS)));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -276,7 +288,9 @@ public class CharacterResourceIntTest {
             .andExpect(jsonPath("$.constituition").value(DEFAULT_CONSTITUITION))
             .andExpect(jsonPath("$.intelligence").value(DEFAULT_INTELLIGENCE))
             .andExpect(jsonPath("$.willpower").value(DEFAULT_WILLPOWER))
-            .andExpect(jsonPath("$.charisma").value(DEFAULT_CHARISMA));
+            .andExpect(jsonPath("$.charisma").value(DEFAULT_CHARISMA))
+            .andExpect(jsonPath("$.attributePoints").value(DEFAULT_ATTRIBUTE_POINTS))
+            .andExpect(jsonPath("$.skillPoints").value(DEFAULT_SKILL_POINTS));
     }
 
     @Test
@@ -311,7 +325,9 @@ public class CharacterResourceIntTest {
             .constituition(UPDATED_CONSTITUITION)
             .intelligence(UPDATED_INTELLIGENCE)
             .willpower(UPDATED_WILLPOWER)
-            .charisma(UPDATED_CHARISMA);
+            .charisma(UPDATED_CHARISMA)
+            .attributePoints(UPDATED_ATTRIBUTE_POINTS)
+            .skillPoints(UPDATED_SKILL_POINTS);
 
         restCharacterMockMvc.perform(put("/api/characters")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -334,6 +350,8 @@ public class CharacterResourceIntTest {
         assertThat(testCharacter.getIntelligence()).isEqualTo(UPDATED_INTELLIGENCE);
         assertThat(testCharacter.getWillpower()).isEqualTo(UPDATED_WILLPOWER);
         assertThat(testCharacter.getCharisma()).isEqualTo(UPDATED_CHARISMA);
+        assertThat(testCharacter.getAttributePoints()).isEqualTo(UPDATED_ATTRIBUTE_POINTS);
+        assertThat(testCharacter.getSkillPoints()).isEqualTo(UPDATED_SKILL_POINTS);
     }
 
     @Test

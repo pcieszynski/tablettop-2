@@ -99,6 +99,10 @@ import rightHand, {
 import leftHand, {
   LeftHandState
 } from 'app/entities/left-hand/left-hand.reducer';
+// prettier-ignore
+import backpack, {
+  BackpackState
+} from 'app/entities/backpack/backpack.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -133,6 +137,7 @@ export interface IRootState {
   readonly gloves: GlovesState;
   readonly rightHand: RightHandState;
   readonly leftHand: LeftHandState;
+  readonly backpack: BackpackState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -169,6 +174,7 @@ const rootReducer = combineReducers<IRootState>({
   gloves,
   rightHand,
   leftHand,
+  backpack,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

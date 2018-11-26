@@ -36,6 +36,13 @@
             "otherEntityName": "shop",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "backpack",
+            "otherEntityName": "backpack",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "boots"
         }
     ],
     "changelogDate": "20181125195755",

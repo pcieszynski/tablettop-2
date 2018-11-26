@@ -28,6 +28,13 @@
             "otherEntityName": "character",
             "ownerSide": false,
             "otherEntityRelationshipName": "item"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "backpack",
+            "otherEntityName": "backpack",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "item"
         }
     ],
     "changelogDate": "20181125195753",

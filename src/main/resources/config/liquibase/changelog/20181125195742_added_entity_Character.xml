@@ -69,6 +69,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="attribute_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="skill_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="game_id" type="bigint">
                 <constraints nullable="true" />
             </column>

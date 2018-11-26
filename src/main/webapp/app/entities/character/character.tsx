@@ -46,6 +46,8 @@ export class Character extends React.Component<ICharacterProps> {
                 <th>Intelligence</th>
                 <th>Willpower</th>
                 <th>Charisma</th>
+                <th>Attribute Points</th>
+                <th>Skill Points</th>
                 <th>Skill</th>
                 <th>Status</th>
                 <th>Item</th>
@@ -82,6 +84,8 @@ export class Character extends React.Component<ICharacterProps> {
                   <td>{character.intelligence}</td>
                   <td>{character.willpower}</td>
                   <td>{character.charisma}</td>
+                  <td>{character.attributePoints}</td>
+                  <td>{character.skillPoints}</td>
                   <td>
                     {character.skills
                       ? character.skills.map((val, j) => (
