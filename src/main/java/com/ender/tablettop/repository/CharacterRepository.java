@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Long> {
 
-    @Query(value = "select distinct character from Character character left join fetch character.skills left join fetch character.games left join fetch character.statuses left join fetch character.items",
+    @Query(value = "select distinct character from Character character left join fetch character.skills left join fetch character.statuses left join fetch character.items",
         countQuery = "select count(distinct character) from Character character")
     Page<Character> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct character from Character character left join fetch character.skills left join fetch character.games left join fetch character.statuses left join fetch character.items")
+    @Query(value = "select distinct character from Character character left join fetch character.skills left join fetch character.statuses left join fetch character.items")
     List<Character> findAllWithEagerRelationships();
 
-    @Query("select character from Character character left join fetch character.skills left join fetch character.games left join fetch character.statuses left join fetch character.items where character.id =:id")
+    @Query("select character from Character character left join fetch character.skills left join fetch character.statuses left join fetch character.items where character.id =:id")
     Optional<Character> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

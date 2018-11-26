@@ -69,6 +69,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="game_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="profession_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -118,17 +122,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="characters_id, skills_id" tableName="character_skill"/>
-        
-        <createTable tableName="character_game">
-            <column name="games_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="characters_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="characters_id, games_id" tableName="character_game"/>
         
         <createTable tableName="character_status">
             <column name="statuses_id" type="bigint">

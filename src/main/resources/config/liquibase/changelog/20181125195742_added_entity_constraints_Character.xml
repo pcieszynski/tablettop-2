@@ -20,17 +20,6 @@
                                  referencedTableName="skill"/>
         
         <addForeignKeyConstraint baseColumnNames="characters_id"
-                                 baseTableName="character_game"
-                                 constraintName="fk_character_game_characters_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="character"/>
-        <addForeignKeyConstraint baseColumnNames="games_id"
-                                 baseTableName="character_game"
-                                 constraintName="fk_character_game_games_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="game"/>
-        
-        <addForeignKeyConstraint baseColumnNames="characters_id"
                                  baseTableName="character_status"
                                  constraintName="fk_character_status_characters_id"
                                  referencedColumnNames="id"
@@ -52,6 +41,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="item"/>
         
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="character"
+                                 constraintName="fk_character_game_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"/>
+
         <addForeignKeyConstraint baseColumnNames="profession_id"
                                  baseTableName="character"
                                  constraintName="fk_character_profession_id"

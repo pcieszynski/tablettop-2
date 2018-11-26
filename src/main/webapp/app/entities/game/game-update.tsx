@@ -12,8 +12,6 @@ import { IPlayer } from 'app/shared/model/player.model';
 import { getEntities as getPlayers } from 'app/entities/player/player.reducer';
 import { IGamemaster } from 'app/shared/model/gamemaster.model';
 import { getEntities as getGamemasters } from 'app/entities/gamemaster/gamemaster.reducer';
-import { ICharacter } from 'app/shared/model/character.model';
-import { getEntities as getCharacters } from 'app/entities/character/character.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './game.reducer';
 import { IGame } from 'app/shared/model/game.model';
 // tslint:disable-next-line:no-unused-variable
@@ -26,7 +24,6 @@ export interface IGameUpdateState {
   isNew: boolean;
   idsplayer: any[];
   gamemasterId: string;
-  characterId: string;
 }
 
 export class GameUpdate extends React.Component<IGameUpdateProps, IGameUpdateState> {
@@ -35,7 +32,6 @@ export class GameUpdate extends React.Component<IGameUpdateProps, IGameUpdateSta
     this.state = {
       idsplayer: [],
       gamemasterId: '0',
-      characterId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -55,7 +51,6 @@ export class GameUpdate extends React.Component<IGameUpdateProps, IGameUpdateSta
 
     this.props.getPlayers();
     this.props.getGamemasters();
-    this.props.getCharacters();
   }
 
   saveEntity = (event, errors, values) => {
@@ -80,7 +75,7 @@ export class GameUpdate extends React.Component<IGameUpdateProps, IGameUpdateSta
   };
 
   render() {
-    const { gameEntity, players, gamemasters, characters, loading, updating } = this.props;
+    const { gameEntity, players, gamemasters, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -167,7 +162,6 @@ export class GameUpdate extends React.Component<IGameUpdateProps, IGameUpdateSta
 const mapStateToProps = (storeState: IRootState) => ({
   players: storeState.player.entities,
   gamemasters: storeState.gamemaster.entities,
-  characters: storeState.character.entities,
   gameEntity: storeState.game.entity,
   loading: storeState.game.loading,
   updating: storeState.game.updating,
@@ -177,7 +171,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getPlayers,
   getGamemasters,
-  getCharacters,
   getEntity,
   updateEntity,
   createEntity,

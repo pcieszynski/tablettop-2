@@ -10,12 +10,12 @@ import { IRootState } from 'app/shared/reducers';
 
 import { ISkill } from 'app/shared/model/skill.model';
 import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
-import { IGame } from 'app/shared/model/game.model';
-import { getEntities as getGames } from 'app/entities/game/game.reducer';
 import { IStatus } from 'app/shared/model/status.model';
 import { getEntities as getStatuses } from 'app/entities/status/status.reducer';
 import { IItem } from 'app/shared/model/item.model';
 import { getEntities as getItems } from 'app/entities/item/item.reducer';
+import { IGame } from 'app/shared/model/game.model';
+import { getEntities as getGames } from 'app/entities/game/game.reducer';
 import { IProfession } from 'app/shared/model/profession.model';
 import { getEntities as getProfessions } from 'app/entities/profession/profession.reducer';
 import { IPlayer } from 'app/shared/model/player.model';
@@ -45,9 +45,9 @@ export interface ICharacterUpdateProps extends StateProps, DispatchProps, RouteC
 export interface ICharacterUpdateState {
   isNew: boolean;
   idsskill: any[];
-  idsgame: any[];
   idsstatus: any[];
   idsitem: any[];
+  gameId: string;
   professionId: string;
   playerId: string;
   helmetId: string;
@@ -64,9 +64,9 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
     super(props);
     this.state = {
       idsskill: [],
-      idsgame: [],
       idsstatus: [],
       idsitem: [],
+      gameId: '0',
       professionId: '0',
       playerId: '0',
       helmetId: '0',
@@ -94,9 +94,9 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
     }
 
     this.props.getSkills();
-    this.props.getGames();
     this.props.getStatuses();
     this.props.getItems();
+    this.props.getGames();
     this.props.getProfessions();
     this.props.getPlayers();
     this.props.getHelmets();
@@ -115,7 +115,6 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
         ...characterEntity,
         ...values,
         skills: mapIdList(values.skills),
-        games: mapIdList(values.games),
         statuses: mapIdList(values.statuses),
         items: mapIdList(values.items)
       };
@@ -136,9 +135,9 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
     const {
       characterEntity,
       skills,
-      games,
       statuses,
       items,
+      games,
       professions,
       players,
       helmets,
@@ -265,26 +264,6 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
                   </AvInput>
                 </AvGroup>
                 <AvGroup>
-                  <Label for="games">Game</Label>
-                  <AvInput
-                    id="character-game"
-                    type="select"
-                    multiple
-                    className="form-control"
-                    name="games"
-                    value={characterEntity.games && characterEntity.games.map(e => e.id)}
-                  >
-                    <option value="" key="0" />
-                    {games
-                      ? games.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
                   <Label for="statuses">Status</Label>
                   <AvInput
                     id="character-status"
@@ -317,6 +296,19 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
                     <option value="" key="0" />
                     {items
                       ? items.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.id}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="game.id">Game</Label>
+                  <AvInput id="character-game" type="select" className="form-control" name="game.id">
+                    <option value="" key="0" />
+                    {games
+                      ? games.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.id}
                           </option>
@@ -460,9 +452,9 @@ export class CharacterUpdate extends React.Component<ICharacterUpdateProps, ICha
 
 const mapStateToProps = (storeState: IRootState) => ({
   skills: storeState.skill.entities,
-  games: storeState.game.entities,
   statuses: storeState.status.entities,
   items: storeState.item.entities,
+  games: storeState.game.entities,
   professions: storeState.profession.entities,
   players: storeState.player.entities,
   helmets: storeState.helmet.entities,
@@ -480,9 +472,9 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getSkills,
-  getGames,
   getStatuses,
   getItems,
+  getGames,
   getProfessions,
   getPlayers,
   getHelmets,
