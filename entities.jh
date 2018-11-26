@@ -31,7 +31,14 @@ entity Character {
     constituition Integer,
     intelligence Integer,
     willpower Integer,
-    charisma Integer	
+    charisma Integer,
+    attributePoints Integer,
+    skillPoints Integer
+}
+
+entity Backpack{
+	
+
 }
 
 entity Profession {
@@ -94,7 +101,8 @@ entity MonsterType {
 }
 
 entity Npc {
-	name String
+	name String,
+    message TextBlob
 }
 
 entity Shop {
@@ -166,6 +174,9 @@ entity LeftHand {
     type String
 }
 
+relationship OneToOne{
+	Backpack to Character
+}
 
 relationship OneToMany {
     Game to Character{game},
@@ -203,7 +214,16 @@ relationship ManyToMany {
     Gloves{shop} to Shop{gloves} ,
     Legs{shop} to Shop{legs},
     RightHand{shop} to Shop{rightHand},
-    LeftHand{shop} to Shop{leftHand}  
+    LeftHand{shop} to Shop{leftHand},
+    Backpack{legs} to Legs{backpack},
+    Backpack{boots} to Boots{backpack},
+    Backpack{gloves} to Gloves{backpack},
+    Backpack{righthand} to RightHand{backpack},
+    Backpack{lefthand} to LeftHand{backpack},
+    Backpack{armour} to Armour{backpack},
+    Backpack{helmet} to Helmet{backpack},
+    Backpack{item} to Item{backpack}
+    
 }
 //Use Data Transfert Objects (DTO)
  //dto * with mapstruct
