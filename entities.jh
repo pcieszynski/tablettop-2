@@ -168,6 +168,7 @@ entity LeftHand {
 
 
 relationship OneToMany {
+    Game to Character{game},
 	Gamemaster to Game{gamemaster},
     Player to Gamemaster{player}
     Profession to Character{profession},
@@ -192,7 +193,6 @@ relationship ManyToMany {
 	Game{player} to Player{game},
     Profession{skill} to Skill{profession},
     Character{skill} to Skill{character},
-    Character{game} to Game{character},
     Character{status} to Status{character},
     Shop{item} to Item{shop},
     Character{item} to Item{character},

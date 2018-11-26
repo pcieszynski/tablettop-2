@@ -1,7 +1,7 @@
 import { ISkill } from 'app/shared/model//skill.model';
-import { IGame } from 'app/shared/model//game.model';
 import { IStatus } from 'app/shared/model//status.model';
 import { IItem } from 'app/shared/model//item.model';
+import { IGame } from 'app/shared/model//game.model';
 import { IProfession } from 'app/shared/model//profession.model';
 import { IPlayer } from 'app/shared/model//player.model';
 import { IHelmet } from 'app/shared/model//helmet.model';
@@ -27,9 +27,9 @@ export interface ICharacter {
   willpower?: number;
   charisma?: number;
   skills?: ISkill[];
-  games?: IGame[];
   statuses?: IStatus[];
   items?: IItem[];
+  game?: IGame;
   profession?: IProfession;
   player?: IPlayer;
   helmet?: IHelmet;

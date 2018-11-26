@@ -68,12 +68,6 @@ public class Character implements Serializable {
     private Set<Skill> skills = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "character_game",
-               joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "games_id", referencedColumnName = "id"))
-    private Set<Game> games = new HashSet<>();
-
-    @ManyToMany
     @JoinTable(name = "character_status",
                joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "statuses_id", referencedColumnName = "id"))
@@ -84,6 +78,10 @@ public class Character implements Serializable {
                joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
     private Set<Item> items = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("characters")
+    private Game game;
 
     @ManyToOne
     @JsonIgnoreProperties("characters")
@@ -311,31 +309,6 @@ public class Character implements Serializable {
         this.skills = skills;
     }
 
-    public Set<Game> getGames() {
-        return games;
-    }
-
-    public Character games(Set<Game> games) {
-        this.games = games;
-        return this;
-    }
-
-    public Character addGame(Game game) {
-        this.games.add(game);
-        game.getCharacters().add(this);
-        return this;
-    }
-
-    public Character removeGame(Game game) {
-        this.games.remove(game);
-        game.getCharacters().remove(this);
-        return this;
-    }
-
-    public void setGames(Set<Game> games) {
-        this.games = games;
-    }
-
     public Set<Status> getStatuses() {
         return statuses;
     }
@@ -384,6 +357,19 @@ public class Character implements Serializable {
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Character game(Game game) {
+        this.game = game;
+        return this;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Profession getProfession() {

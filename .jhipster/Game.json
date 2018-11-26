@@ -13,6 +13,12 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
+            "relationshipName": "character",
+            "otherEntityName": "character",
+            "otherEntityRelationshipName": "game"
+        },
+        {
+            "relationshipType": "one-to-many",
             "relationshipName": "event",
             "otherEntityName": "event",
             "otherEntityRelationshipName": "game"
@@ -30,13 +36,6 @@
             "relationshipName": "gamemaster",
             "otherEntityName": "gamemaster",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "character",
-            "otherEntityName": "character",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "game"
         }
     ],
     "changelogDate": "20181125195741",

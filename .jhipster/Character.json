@@ -62,14 +62,6 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "character",
-            "relationshipName": "game",
-            "otherEntityName": "game",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "character",
             "relationshipName": "status",
             "otherEntityName": "status",
             "otherEntityField": "id",
@@ -82,6 +74,12 @@
             "otherEntityName": "item",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "game",
+            "otherEntityName": "game",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",

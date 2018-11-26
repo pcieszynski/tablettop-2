@@ -47,9 +47,9 @@ export class Character extends React.Component<ICharacterProps> {
                 <th>Willpower</th>
                 <th>Charisma</th>
                 <th>Skill</th>
-                <th>Game</th>
                 <th>Status</th>
                 <th>Item</th>
+                <th>Game</th>
                 <th>Profession</th>
                 <th>Player</th>
                 <th>Helmet</th>
@@ -93,16 +93,6 @@ export class Character extends React.Component<ICharacterProps> {
                       : null}
                   </td>
                   <td>
-                    {character.games
-                      ? character.games.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`game/${val.id}`}>{val.id}</Link>
-                            {j === character.games.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
-                  <td>
                     {character.statuses
                       ? character.statuses.map((val, j) => (
                           <span key={j}>
@@ -122,6 +112,7 @@ export class Character extends React.Component<ICharacterProps> {
                         ))
                       : null}
                   </td>
+                  <td>{character.game ? <Link to={`game/${character.game.id}`}>{character.game.id}</Link> : ''}</td>
                   <td>{character.profession ? <Link to={`profession/${character.profession.id}`}>{character.profession.id}</Link> : ''}</td>
                   <td>{character.player ? <Link to={`player/${character.player.id}`}>{character.player.id}</Link> : ''}</td>
                   <td>{character.helmet ? <Link to={`helmet/${character.helmet.id}`}>{character.helmet.id}</Link> : ''}</td>

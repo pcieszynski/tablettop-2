@@ -31,6 +31,8 @@ public class Game implements Serializable {
     private String currentPlayer;
 
     @OneToMany(mappedBy = "game")
+    private Set<Character> characters = new HashSet<>();
+    @OneToMany(mappedBy = "game")
     private Set<Event> events = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "game_player",
@@ -41,10 +43,6 @@ public class Game implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("games")
     private Gamemaster gamemaster;
-
-    @ManyToMany(mappedBy = "games")
-    @JsonIgnore
-    private Set<Character> characters = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +77,31 @@ public class Game implements Serializable {
 
     public void setCurrentPlayer(String currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public Game characters(Set<Character> characters) {
+        this.characters = characters;
+        return this;
+    }
+
+    public Game addCharacter(Character character) {
+        this.characters.add(character);
+        character.setGame(this);
+        return this;
+    }
+
+    public Game removeCharacter(Character character) {
+        this.characters.remove(character);
+        character.setGame(null);
+        return this;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
     }
 
     public Set<Event> getEvents() {
@@ -142,31 +165,6 @@ public class Game implements Serializable {
 
     public void setGamemaster(Gamemaster gamemaster) {
         this.gamemaster = gamemaster;
-    }
-
-    public Set<Character> getCharacters() {
-        return characters;
-    }
-
-    public Game characters(Set<Character> characters) {
-        this.characters = characters;
-        return this;
-    }
-
-    public Game addCharacter(Character character) {
-        this.characters.add(character);
-        character.getGames().add(this);
-        return this;
-    }
-
-    public Game removeCharacter(Character character) {
-        this.characters.remove(character);
-        character.getGames().remove(this);
-        return this;
-    }
-
-    public void setCharacters(Set<Character> characters) {
-        this.characters = characters;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

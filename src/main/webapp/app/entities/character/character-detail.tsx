@@ -87,17 +87,6 @@ export class CharacterDetail extends React.Component<ICharacterDetailProps> {
                   ))
                 : null}
             </dd>
-            <dt>Game</dt>
-            <dd>
-              {characterEntity.games
-                ? characterEntity.games.map((val, i) => (
-                    <span key={val.id}>
-                      <a>{val.id}</a>
-                      {i === characterEntity.games.length - 1 ? '' : ', '}
-                    </span>
-                  ))
-                : null}
-            </dd>
             <dt>Status</dt>
             <dd>
               {characterEntity.statuses
@@ -120,6 +109,8 @@ export class CharacterDetail extends React.Component<ICharacterDetailProps> {
                   ))
                 : null}
             </dd>
+            <dt>Game</dt>
+            <dd>{characterEntity.game ? characterEntity.game.id : ''}</dd>
             <dt>Profession</dt>
             <dd>{characterEntity.profession ? characterEntity.profession.id : ''}</dd>
             <dt>Player</dt>
