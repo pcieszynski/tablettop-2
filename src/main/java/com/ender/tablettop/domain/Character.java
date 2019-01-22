@@ -68,7 +68,7 @@ public class Character implements Serializable {
     @Column(name = "skill_points")
     private Integer skillPoints;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "character_skill",
                joinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "skills_id", referencedColumnName = "id"))

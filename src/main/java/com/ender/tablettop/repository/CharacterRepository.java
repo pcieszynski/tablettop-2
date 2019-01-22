@@ -27,4 +27,6 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
     @Query("select character from Character character left join fetch character.skills left join fetch character.statuses left join fetch character.items where character.id =:id")
     Optional<Character> findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select character from Character character where character.player.username=:username AND character.game.id=:gameid")
+    Optional<Character> findByPlayerIdAndGameId(@Param("username") String username, @Param("gameid") Long gameId);
 }

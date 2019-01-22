@@ -75,4 +75,11 @@ public class EventServiceImpl implements EventService {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
     }
+
+    @Override
+    public List<Event> findByGameId(String gameId) {
+        log.debug("Request to get Events by gameId  : {}", gameId);
+        return eventRepository.findAllByGameId(Long.parseLong(gameId));
+    }
+
 }

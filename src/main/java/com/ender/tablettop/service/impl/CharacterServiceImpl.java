@@ -63,7 +63,7 @@ public class CharacterServiceImpl implements CharacterService {
     public Page<Character> findAllWithEagerRelationships(Pageable pageable) {
         return characterRepository.findAllWithEagerRelationships(pageable);
     }
-    
+
 
 
     /**
@@ -101,5 +101,10 @@ public class CharacterServiceImpl implements CharacterService {
     public void delete(Long id) {
         log.debug("Request to delete Character : {}", id);
         characterRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Character> findByPlayerIdAndGameId(String playerId, String gameId) {
+        return characterRepository.findByPlayerIdAndGameId(playerId,Long.parseLong(gameId));
     }
 }

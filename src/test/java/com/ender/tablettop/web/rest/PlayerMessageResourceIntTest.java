@@ -4,6 +4,8 @@ import com.ender.tablettop.TabletTopApp;
 
 import com.ender.tablettop.domain.PlayerMessage;
 import com.ender.tablettop.repository.PlayerMessageRepository;
+import com.ender.tablettop.service.EventService;
+import com.ender.tablettop.service.GameService;
 import com.ender.tablettop.service.PlayerMessageService;
 import com.ender.tablettop.web.rest.errors.ExceptionTranslator;
 
@@ -20,7 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -77,6 +78,12 @@ public class PlayerMessageResourceIntTest {
     @Autowired
     private EntityManager em;
 
+    @Autowired
+    EventService eventService;
+
+    @Autowired
+    GameService gameService;
+
     private MockMvc restPlayerMessageMockMvc;
 
     private PlayerMessage playerMessage;
@@ -84,7 +91,7 @@ public class PlayerMessageResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PlayerMessageResource playerMessageResource = new PlayerMessageResource(playerMessageService);
+        final PlayerMessageResource playerMessageResource = new PlayerMessageResource(playerMessageService, eventService, gameService);
         this.restPlayerMessageMockMvc = MockMvcBuilders.standaloneSetup(playerMessageResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -174,7 +181,7 @@ public class PlayerMessageResourceIntTest {
             .andExpect(jsonPath("$.[*].success").value(hasItem(DEFAULT_SUCCESS.booleanValue())))
             .andExpect(jsonPath("$.[*].attribute").value(hasItem(DEFAULT_ATTRIBUTE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getPlayerMessage() throws Exception {

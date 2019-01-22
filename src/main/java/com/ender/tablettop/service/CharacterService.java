@@ -40,7 +40,7 @@ public interface CharacterService {
      * @return the list of entities
      */
     Page<Character> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" character.
      *
@@ -55,4 +55,6 @@ public interface CharacterService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Optional<Character> findByPlayerIdAndGameId(String playerId, String gameId);
 }

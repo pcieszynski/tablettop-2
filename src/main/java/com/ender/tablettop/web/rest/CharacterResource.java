@@ -122,4 +122,11 @@ public class CharacterResource {
         characterService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("characters/player/{username}/game/{gameId}")
+    @Timed
+    public ResponseEntity<Character> getCharacterByPlayerIdAndGameId(@PathVariable String username, @PathVariable String gameId){
+        Optional<Character> character = characterService.findByPlayerIdAndGameId(username,gameId);
+        return ResponseUtil.wrapOrNotFound(character);
+    }
 }

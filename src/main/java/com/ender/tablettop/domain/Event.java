@@ -31,11 +31,11 @@ public class Event implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     private Set<Npc> npcs = new HashSet<>();
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     private Set<Battle> battles = new HashSet<>();
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     private Set<PlayerMessage> playerMessages = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("events")

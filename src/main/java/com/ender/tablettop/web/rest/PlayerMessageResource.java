@@ -1,7 +1,10 @@
 package com.ender.tablettop.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.ender.tablettop.domain.Event;
 import com.ender.tablettop.domain.PlayerMessage;
+import com.ender.tablettop.service.EventService;
+import com.ender.tablettop.service.GameService;
 import com.ender.tablettop.service.PlayerMessageService;
 import com.ender.tablettop.web.rest.errors.BadRequestAlertException;
 import com.ender.tablettop.web.rest.util.HeaderUtil;
@@ -11,11 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing PlayerMessage.
@@ -29,9 +32,13 @@ public class PlayerMessageResource {
     private static final String ENTITY_NAME = "playerMessage";
 
     private final PlayerMessageService playerMessageService;
+    private final EventService eventService;
+    private final GameService gameService;
 
-    public PlayerMessageResource(PlayerMessageService playerMessageService) {
+    public PlayerMessageResource(PlayerMessageService playerMessageService, EventService eventService, GameService gameService) {
         this.playerMessageService = playerMessageService;
+        this.eventService = eventService;
+        this.gameService = gameService;
     }
 
     /**
@@ -114,5 +121,31 @@ public class PlayerMessageResource {
         log.debug("REST request to delete PlayerMessage : {}", id);
         playerMessageService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @PostMapping("/player-messages/event/{gameid}")
+    @Timed
+    public ResponseEntity<PlayerMessage> createPlayerMessageWithEvent(@RequestBody PlayerMessage playerMessage, @PathVariable("gameid") String gameid) throws URISyntaxException {
+        log.debug("REST request to save PlayerMessage : {}", playerMessage);
+        if (playerMessage.getId() != null) {
+            throw new BadRequestAlertException("A new playerMessage cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        PlayerMessage message = createMessageWithEvent(playerMessage,gameid);
+        return ResponseEntity.created(new URI("/api/player-messages/" + message.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, message.getId().toString()))
+            .body(message);
+    }
+
+    private PlayerMessage createMessageWithEvent(PlayerMessage playerMessage, String gameid) {
+        PlayerMessage message = playerMessageService.save(playerMessage);
+        Event event = new Event();
+        Set<PlayerMessage> messges = new HashSet<>();
+        messges.add(message);
+        message.setEvent(event);
+        event.setPlayerMessages(messges);
+        event.setGame(gameService.findOne(Long.parseLong(gameid)).orElse(null));
+        eventService.save(event);
+        playerMessageService.save(playerMessage);
+        return message;
     }
 }

@@ -115,4 +115,10 @@ public class EventResource {
         eventService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/events/game/{gameId}")
+    @Timed
+    public List<Event> getEventByGameId(@PathVariable String gameId) {
+        return eventService.findByGameId(gameId);
+    }
 }
