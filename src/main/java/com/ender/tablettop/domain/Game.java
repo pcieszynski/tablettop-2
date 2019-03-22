@@ -36,11 +36,11 @@ public class Game implements Serializable {
     private Set<Event> events = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "game_player",
-               joinColumns = @JoinColumn(name = "games_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "players_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "games_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "players_id", referencedColumnName = "id"))
     private Set<Player> players = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("games")
     private Gamemaster gamemaster;
 

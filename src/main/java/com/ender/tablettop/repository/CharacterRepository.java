@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Spring Data  repository for the Character entity.
@@ -29,4 +30,7 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     @Query("select character from Character character where character.player.username=:username AND character.game.id=:gameid")
     Optional<Character> findByPlayerIdAndGameId(@Param("username") String username, @Param("gameid") Long gameId);
+
+    @Query("select character from Character character where character.game.id=:gameid")
+    List<Character> findByGameId(@Param("gameid") Long gameid);
 }

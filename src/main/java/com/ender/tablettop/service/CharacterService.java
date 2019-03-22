@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing Character.
@@ -57,4 +58,6 @@ public interface CharacterService {
     void delete(Long id);
 
     Optional<Character> findByPlayerIdAndGameId(String playerId, String gameId);
+
+    List<Character> findByGameId(String gameId);
 }

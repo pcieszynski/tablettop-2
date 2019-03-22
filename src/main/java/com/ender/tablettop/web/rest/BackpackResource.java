@@ -116,4 +116,13 @@ public class BackpackResource {
         backpackService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/backpacks/character/{characterId}")
+    @Timed
+    public ResponseEntity<Backpack> getBackpackByCharacterId(@PathVariable Long characterId) {
+        log.debug("REST request to get Backpack by character: {}", characterId);
+        Optional<Backpack> backpack = backpackService.findByCharacterId(characterId);
+        return ResponseUtil.wrapOrNotFound(backpack);
+    }
+
 }

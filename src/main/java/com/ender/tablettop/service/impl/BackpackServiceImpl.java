@@ -61,7 +61,7 @@ public class BackpackServiceImpl implements BackpackService {
     public Page<Backpack> findAllWithEagerRelationships(Pageable pageable) {
         return backpackRepository.findAllWithEagerRelationships(pageable);
     }
-    
+
 
     /**
      * Get one backpack by id.
@@ -86,4 +86,11 @@ public class BackpackServiceImpl implements BackpackService {
         log.debug("Request to delete Backpack : {}", id);
         backpackRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Backpack> findByCharacterId(Long characterId) {
+        return backpackRepository.findByCharacterId(characterId);
+    }
+
+
 }

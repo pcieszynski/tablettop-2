@@ -27,4 +27,5 @@ public interface BackpackRepository extends JpaRepository<Backpack, Long> {
     @Query("select backpack from Backpack backpack left join fetch backpack.legs left join fetch backpack.boots left join fetch backpack.gloves left join fetch backpack.righthands left join fetch backpack.lefthands left join fetch backpack.armours left join fetch backpack.helmets left join fetch backpack.items where backpack.id =:id")
     Optional<Backpack> findOneWithEagerRelationships(@Param("id") Long id);
 
+    Optional<Backpack> findByCharacterId(Long characterId);
 }

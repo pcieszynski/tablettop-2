@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 /**
@@ -81,12 +82,12 @@ public class CharacterResource {
      * GET  /characters : get all the characters.
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
-     * @param filter the filter of the request
+     * @param filter    the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of characters in body
      */
     @GetMapping("/characters")
     @Timed
-    public List<Character> getAllCharacters(@RequestParam(required = false) String filter,@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Character> getAllCharacters(@RequestParam(required = false) String filter, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         if ("backpack-is-null".equals(filter)) {
             log.debug("REST request to get all Characters where backpack is null");
             return characterService.findAllWhereBackpackIsNull();
@@ -123,10 +124,17 @@ public class CharacterResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @GetMapping("characters/player/{username}/game/{gameId}")
+    @GetMapping("/characters/player/{username}/game/{gameId}")
     @Timed
-    public ResponseEntity<Character> getCharacterByPlayerIdAndGameId(@PathVariable String username, @PathVariable String gameId){
-        Optional<Character> character = characterService.findByPlayerIdAndGameId(username,gameId);
+    public ResponseEntity<Character> getCharacterByPlayerIdAndGameId(@PathVariable String username, @PathVariable String gameId) {
+        Optional<Character> character = characterService.findByPlayerIdAndGameId(username, gameId);
         return ResponseUtil.wrapOrNotFound(character);
+    }
+
+    @GetMapping("/characters/game/{gameid}")
+    @Timed
+    public List<Character> getCharactersByGameId(@PathVariable String gameid) {
+        List<Character> characters = characterService.findByGameId(gameid);
+        return characters;
     }
 }

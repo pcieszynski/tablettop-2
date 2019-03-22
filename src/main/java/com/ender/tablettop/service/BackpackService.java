@@ -34,7 +34,7 @@ public interface BackpackService {
      * @return the list of entities
      */
     Page<Backpack> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" backpack.
      *
@@ -49,4 +49,6 @@ public interface BackpackService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Optional<Backpack> findByCharacterId(Long characterId);
 }

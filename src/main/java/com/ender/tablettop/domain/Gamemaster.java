@@ -26,7 +26,7 @@ public class Gamemaster implements Serializable {
 
     @OneToMany(mappedBy = "gamemaster")
     private Set<Game> games = new HashSet<>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("gamemasters")
     private Player player;
 

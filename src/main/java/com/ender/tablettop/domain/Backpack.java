@@ -22,55 +22,56 @@ public class Backpack implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private Character character;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_legs",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "legs_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "legs_id", referencedColumnName = "id"))
     private Set<Legs> legs = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_boots",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "boots_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "boots_id", referencedColumnName = "id"))
     private Set<Boots> boots = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_gloves",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "gloves_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "gloves_id", referencedColumnName = "id"))
     private Set<Gloves> gloves = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_righthand",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "righthands_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "righthands_id", referencedColumnName = "id"))
     private Set<RightHand> righthands = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_lefthand",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "lefthands_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "lefthands_id", referencedColumnName = "id"))
     private Set<LeftHand> lefthands = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_armour",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "armours_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "armours_id", referencedColumnName = "id"))
     private Set<Armour> armours = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_helmet",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "helmets_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "helmets_id", referencedColumnName = "id"))
     private Set<Helmet> helmets = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "backpack_item",
-               joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "backpacks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
     private Set<Item> items = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

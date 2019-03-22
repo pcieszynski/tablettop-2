@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -65,12 +66,12 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
 
-
     /**
-     *  get all the characters where Backpack is null.
-     *  @return the list of entities
+     * get all the characters where Backpack is null.
+     *
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Character> findAllWhereBackpackIsNull() {
         log.debug("Request to get all characters where Backpack is null");
         return StreamSupport
@@ -105,6 +106,11 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Optional<Character> findByPlayerIdAndGameId(String playerId, String gameId) {
-        return characterRepository.findByPlayerIdAndGameId(playerId,Long.parseLong(gameId));
+        return characterRepository.findByPlayerIdAndGameId(playerId, Long.parseLong(gameId));
+    }
+
+    @Override
+    public List<Character> findByGameId(String gameId) {
+        return characterRepository.findByGameId(Long.parseLong(gameId));
     }
 }
