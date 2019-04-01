@@ -31,7 +31,9 @@
     "jhiPrefix": "jhi",
     "jhipsterVersion": "5.7.0",
     "jwtSecretKey": "YWYwZTMwZWZkZGY0ZjI3MWZiMTgzMmQ2NDUwNWE4ZmRlNWI4OWQzOTY3YmJlMmMzOTM0OWZjOGQ3M2I5NDFiYzI4OGNkOThhMjNlYmM1NGVjYWFmNzBkY2JhNmFlZTE0ZjkyMjVmYjg0N2EwYTVjNTMwZTg5NDQyNjZhNTFmNWY=",
-    "otherModules": []
+    "otherModules": [],
+    "herokuAppName": "tablet-top",
+    "herokuDeployType": "jar"
   },
   "git-provider": "GitHub",
   "git-company": "pcieszynski",
